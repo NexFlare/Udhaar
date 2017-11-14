@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.ContactsContract
 import android.support.v4.app.ActivityCompat
+import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.widget.Toast
 import com.google.firebase.database.*
@@ -18,17 +19,42 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
     private lateinit var firebaseDataBase:FirebaseDatabase
     private lateinit var databaseReference:DatabaseReference
-    var childCount:Long?=null
+    private lateinit var userArrayList:ArrayList<User>
+    private lateinit var adapter:UserAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         firebaseDataBase= FirebaseDatabase.getInstance()
         firebaseDataBase.setPersistenceEnabled(true)
         databaseReference=firebaseDataBase.getReference("users")
+        userArrayList=ArrayList()
+        adapter= UserAdapter(this,userArrayList)
+        userRv.layoutManager=LinearLayoutManager(this)
+        userRv.adapter=adapter
+        getUserData()
         fab.setOnClickListener {
             checkForPermission()
         }
 
+    }
+
+    private fun getUserData() {
+        databaseReference.addValueEventListener(object :ValueEventListener{
+            override fun onCancelled(p0: DatabaseError?) {
+                showToast(p0?.toString()?:"Some error occured")
+            }
+
+            override fun onDataChange(p0: DataSnapshot?) {
+                userArrayList.clear()
+                for (user:DataSnapshot in p0?.children!!){
+                    userArrayList.add(User(user.child("name").value.toString(),
+                            user.child("phone").value.toString(),
+                            user.child("total").value as Long))
+                }
+                adapter.updateArrayList(userArrayList)
+            }
+
+        })
     }
 
     private fun checkForPermission() {
@@ -58,20 +84,19 @@ class MainActivity : AppCompatActivity() {
                 val user=User(name,number)
                 val key=databaseReference.push().key
                 databaseReference.child(key).setValue(user)
-                /*databaseReference.addListenerForSingleValueEvent(object :ValueEventListener{
+                databaseReference.addListenerForSingleValueEvent(object :ValueEventListener{
                     override fun onCancelled(p0: DatabaseError?) {
                         showToast(p0?.message?:"Some error occurred")
                     }
 
                     override fun onDataChange(p0: DataSnapshot?) {
                         for(contact:DataSnapshot in p0?.children!!){
-                            Log.d("TAGGER",contact.key+": "+contact.value)
+                            Log.d("TAGGER",contact.key+": "+contact.child("total").value)
                         }
-                        childCount=p0?.childrenCount
-                        databaseReference.child(childCount.toString()).setValue(user)
+
                     }
 
-                })*/
+                })
 
 
 
