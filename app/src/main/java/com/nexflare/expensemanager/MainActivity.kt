@@ -56,7 +56,9 @@ class MainActivity : AppCompatActivity() {
                 val number = cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.NUMBER))
                 val name = cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME))
                 val user=User(name,number)
-                databaseReference.addListenerForSingleValueEvent(object :ValueEventListener{
+                val key=databaseReference.push().key
+                databaseReference.child(key).setValue(user)
+                /*databaseReference.addListenerForSingleValueEvent(object :ValueEventListener{
                     override fun onCancelled(p0: DatabaseError?) {
                         showToast(p0?.message?:"Some error occurred")
                     }
@@ -69,7 +71,7 @@ class MainActivity : AppCompatActivity() {
                         databaseReference.child(childCount.toString()).setValue(user)
                     }
 
-                })
+                })*/
 
 
 
