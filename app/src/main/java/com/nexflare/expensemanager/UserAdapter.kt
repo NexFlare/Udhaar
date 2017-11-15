@@ -1,6 +1,7 @@
 package com.nexflare.expensemanager
 
 import android.content.Context
+import android.content.Intent
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -33,6 +34,10 @@ class UserAdapter(val context:Context,var arrayList: ArrayList<User>?):RecyclerV
             val user= arrayList?.get(position)
             nameTv?.text=user?.name
             amountTv?.text="\u20B9 "+user?.total
+            itemView.setOnClickListener({
+                val intent= Intent(context,ExpenseActivity::class.java)
+                context.startActivity(intent)
+            })
         }
     }
 

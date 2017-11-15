@@ -9,9 +9,11 @@ import android.database.Cursor
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.ContactsContract
+import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_main.*
@@ -35,7 +37,6 @@ class MainActivity : AppCompatActivity() {
         fab.setOnClickListener {
             checkForPermission()
         }
-
     }
 
     private fun getUserData() {
@@ -112,11 +113,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-    /*inline fun View.snack(message: String, length: Int = Snackbar.LENGTH_SHORT, f: Snackbar.() -> Unit) {
+    inline fun View.snack(message: String, length: Int = Snackbar.LENGTH_SHORT, f: Snackbar.() -> Unit) {
         val snack = Snackbar.make(this, message, length)
         snack.f()
         snack.show()
-    }*/
+    }
     private fun Context.showToast(message:String){
         Toast.makeText(this,message,Toast.LENGTH_SHORT).show()
     }
