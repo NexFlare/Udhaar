@@ -17,8 +17,26 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/amountEt"
-            android:inputType="numberSigned"/>
+            android:inputType="number"/>
     </android.support.design.widget.TextInputLayout>
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/radioGroup"
+            android:orientation="horizontal">
+            <RadioButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Me"
+                android:checked="true"
+                android:id="@+id/me"/>
+            <RadioButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/user"/>
+        </RadioGroup>
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -64,7 +82,6 @@
         android:fontFamily="@font/muli_semibold"
         android:background="@android:color/white"
         android:id="@+id/okTv"
-        android:gravity="right|center"
         android:textColor="@color/colorAccent"
         android:textSize="18dp"
         />
