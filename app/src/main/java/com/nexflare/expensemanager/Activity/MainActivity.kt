@@ -1,4 +1,4 @@
-package com.nexflare.expensemanager
+package com.nexflare.expensemanager.Activity
 
 import android.Manifest
 import android.app.Activity
@@ -16,13 +16,16 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.google.firebase.database.*
+import com.nexflare.expensemanager.R
+import com.nexflare.expensemanager.User
+import com.nexflare.expensemanager.UserAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var firebaseDataBase:FirebaseDatabase
     private lateinit var databaseReference:DatabaseReference
     private lateinit var userArrayList:ArrayList<User>
-    private lateinit var adapter:UserAdapter
+    private lateinit var adapter: UserAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -30,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         firebaseDataBase.setPersistenceEnabled(true)
         databaseReference=firebaseDataBase.getReference("users")
         userArrayList=ArrayList()
-        adapter= UserAdapter(this,userArrayList)
+        adapter= UserAdapter(this, userArrayList)
         userRv.layoutManager=LinearLayoutManager(this)
         userRv.adapter=adapter
         getUserData()
@@ -82,7 +85,7 @@ class MainActivity : AppCompatActivity() {
                 cursor.moveToFirst()
                 val number = cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.NUMBER))
                 val name = cursor.getString(cursor.getColumnIndexOrThrow(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME))
-                val user=User(name,number)
+                val user= User(name, number)
                 val key=databaseReference.push().key
                 databaseReference.child(key).setValue(user)
                 databaseReference.addListenerForSingleValueEvent(object :ValueEventListener{

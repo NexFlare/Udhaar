@@ -1,48 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="#fafbfa">
 
 
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        app:cardCornerRadius="3dp"
-        app:cardElevation="3dp">
-        <LinearLayout
-            android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/nameTv"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:fontFamily="@font/muli_semibold"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="Harsh Mohan Agarwal"
+        android:textColor="@android:color/black"
+        android:textSize="18dp" />
+    <RelativeLayout
+        android:layout_width="100dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:elevation="8dp"
+        android:background="@drawable/chip">
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:paddingLeft="5dp">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/boy"/>
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="16dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Harsh Mohan Agarwal"
-                    android:id="@+id/nameTv"
-                    android:gravity="center"
-                    android:textColor="@android:color/black"
-                    android:textSize="18dp"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/amountTv"
-                    android:layout_below="@id/nameTv"
-                    android:text="\u20B9 100"
-                    android:textColor="@android:color/black"/>
-            </RelativeLayout>
+            android:textSize="18dp"
+            android:text="\u20B9 1000"
+            android:id="@+id/amountTv"
+            android:textColor="@android:color/black"
+            android:layout_centerInParent="true"/>
+        <View
+            android:layout_width="20dp"
+            android:layout_height="4dp"
+            android:layout_marginLeft="20dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:background="#65e761"/>
 
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
+    </RelativeLayout>
+
+
 </RelativeLayout>
