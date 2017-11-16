@@ -18,7 +18,7 @@ import android.widget.Toast
 import com.google.firebase.database.*
 import com.nexflare.expensemanager.R
 import com.nexflare.expensemanager.User
-import com.nexflare.expensemanager.UserAdapter
+import com.nexflare.expensemanager.Adapter.UserAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -49,6 +49,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onDataChange(p0: DataSnapshot?) {
+                showToast("This method was called")
                 userArrayList.clear()
                 for (user:DataSnapshot in p0?.children!!){
                     userArrayList.add(User(user.child("name").value.toString(),

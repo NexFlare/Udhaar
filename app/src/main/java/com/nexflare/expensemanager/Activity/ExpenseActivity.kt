@@ -4,24 +4,22 @@ import android.app.Dialog
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.design.widget.TextInputLayout
+import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-import com.nexflare.expensemanager.DatePickerFragment
-import com.nexflare.expensemanager.DatePickerInterface
-import com.nexflare.expensemanager.Expense
+import com.google.firebase.database.*
+import com.nexflare.expensemanager.*
+import com.nexflare.expensemanager.Adapter.ExpenseAdapter
 import com.nexflare.expensemanager.R
 import kotlinx.android.synthetic.main.activity_expense.*
-import kotlinx.android.synthetic.main.layout_expense_dailog.*
 
 
 class ExpenseActivity : AppCompatActivity() {
-    lateinit var firebaseDatabase:FirebaseDatabase
-    lateinit var databaseReference:DatabaseReference
+    private lateinit var firebaseDatabase:FirebaseDatabase
+    private lateinit var databaseReference:DatabaseReference
+    private lateinit var expenseAdapter: ExpenseAdapter
     lateinit var phone:String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +27,10 @@ class ExpenseActivity : AppCompatActivity() {
         firebaseDatabase= FirebaseDatabase.getInstance()
         databaseReference=firebaseDatabase.getReference("expense")
         phone=intent.getStringExtra("phone")
+        expenseAdapter = ExpenseAdapter(this, ArrayList())
+        expenseRv.layoutManager=LinearLayoutManager(this)
+        expenseRv.adapter=expenseAdapter
+        getUserData()
         fabExpense.setOnClickListener{
 
             val dialog=Dialog(this@ExpenseActivity)
@@ -54,10 +56,43 @@ class ExpenseActivity : AppCompatActivity() {
                 databaseReference.child(phone).child(key).setValue(Expense(amountEt.text.toString().toLong(),
                         reason.text.toString(),
                         dateEt.text.toString()))
+                firebaseDatabase.getReference("users").orderByChild("phone").equalTo(phone).addListenerForSingleValueEvent(object :ValueEventListener{
+                    override fun onCancelled(p0: DatabaseError?) {
+                        Log.d("TAGGER",p0?.message?:"Some error occurred")
+                    }
+
+                    override fun onDataChange(p0: DataSnapshot?) {
+                        Log.d("TAGGER",p0?.hasChildren().toString())
+                        for(userSnapshot:DataSnapshot in p0!!.children)
+                            //Log.d("TAGGER",userSnapshot.child("total").value.toString())
+                            userSnapshot.ref?.child("total")?.setValue(amountEt.text.toString().toLong().plus( userSnapshot.child("total")?.value as Long))
+                    }
+
+                })
                 dialog.dismiss()
             }
             dialog.show()
         }
     }
+    private fun getUserData() {
+        databaseReference.child(phone).addValueEventListener(object :ValueEventListener{
+            override fun onCancelled(p0: DatabaseError?) {
+                Log.d("TAGGER",p0?.toString()?:"Some error occured")
+            }
+
+            override fun onDataChange(p0: DataSnapshot?) {
+                val arrayList=ArrayList<Expense>()
+                for (user:DataSnapshot in p0?.children!!){
+                    Log.d("TAGGER",user.value.toString())
+                    arrayList.add(Expense(user.child("amount").value.toString().toLong(),
+                            user.child("reason").value.toString(),
+                            user.child("time").value.toString()))
+                }
+                expenseAdapter.updateArrayList(arrayList)
+            }
+
+        })
+    }
 
 }
+

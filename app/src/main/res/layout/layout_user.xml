@@ -22,7 +22,7 @@
             android:paddingLeft="16dp"
             android:text="Harsh Mohan Agarwal"
             android:textColor="@android:color/black"
-            android:textSize="18dp" />
+            android:textSize="21dp" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -56,6 +56,7 @@
             android:layout_width="20dp"
             android:layout_height="4dp"
             android:layout_marginLeft="20dp"
+            android:id="@+id/colorView"
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
             android:background="#65e761"/>

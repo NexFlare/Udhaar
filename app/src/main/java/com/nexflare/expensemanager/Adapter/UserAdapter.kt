@@ -1,14 +1,15 @@
-package com.nexflare.expensemanager
+package com.nexflare.expensemanager.Adapter
 
 import android.content.Context
 import android.content.Intent
-import android.opengl.Visibility
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.nexflare.expensemanager.Activity.ExpenseActivity
+import com.nexflare.expensemanager.R
+import com.nexflare.expensemanager.User
 
 /**
  * Created by nexflare on 15/11/17.
