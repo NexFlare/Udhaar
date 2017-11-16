@@ -6,26 +6,44 @@
     android:layout_height="wrap_content"
     android:background="#fafbfa">
 
-
-    <TextView
-        android:id="@+id/nameTv"
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:fontFamily="@font/muli_semibold"
-        android:gravity="center"
-        android:padding="16dp"
-        android:text="Harsh Mohan Agarwal"
-        android:textColor="@android:color/black"
-        android:textSize="18dp" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/nameTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/muli_semibold"
+            android:gravity="center"
+            android:paddingTop="16dp"
+            android:paddingLeft="16dp"
+            android:text="Harsh Mohan Agarwal"
+            android:textColor="@android:color/black"
+            android:textSize="18dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="08-06-1997"
+            android:id="@+id/dateTv"
+            android:layout_gravity="left"
+            android:paddingLeft="16dp"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="5dp"/>
+    </LinearLayout>
+
     <RelativeLayout
-        android:layout_width="100dp"
+        android:layout_width="120dp"
         android:layout_height="60dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:elevation="8dp"
-        android:background="@drawable/chip">
+        android:background="@drawable/chip"
+        android:id="@+id/relativeLayout">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

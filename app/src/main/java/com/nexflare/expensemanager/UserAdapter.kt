@@ -2,6 +2,7 @@ package com.nexflare.expensemanager
 
 import android.content.Context
 import android.content.Intent
+import android.opengl.Visibility
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -30,13 +31,17 @@ class UserAdapter(val context:Context,var arrayList: ArrayList<User>?):RecyclerV
     inner class UserViewHolder(itemView:View?):RecyclerView.ViewHolder(itemView){
         private val nameTv=itemView?.findViewById<TextView>(R.id.nameTv)
         private val amountTv=itemView?.findViewById<TextView>(R.id.amountTv)
+        private val dateTv=itemView?.findViewById<TextView>(R.id.dateTv)
 
         fun bindData(position:Int){
             val user= arrayList?.get(position)
             nameTv?.text=user?.name
             amountTv?.text="\u20B9 "+user?.total
+            dateTv?.visibility = View.GONE
             itemView.setOnClickListener({
                 val intent= Intent(context, ExpenseActivity::class.java)
+                intent.putExtra("phone",user?.phone)
+                intent.putExtra("name",user?.name)
                 context.startActivity(intent)
             })
         }
