@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="64dp"
+    android:background="@android:color/white"
+    android:elevation="5dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Udhaar"
+            android:fontFamily="@font/muli_semibold"
+            android:textColor="@android:color/black"
+            android:textSize="23sp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/totalUdhaar"
+                android:fontFamily="@font/muli_semibold"
+                android:text="Total \u20B9 "/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+</android.support.v7.widget.Toolbar>

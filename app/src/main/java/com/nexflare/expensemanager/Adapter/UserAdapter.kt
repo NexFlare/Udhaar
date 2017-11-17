@@ -49,12 +49,12 @@ class UserAdapter(val context:Context,var arrayList: ArrayList<User>?):RecyclerV
             else{
                 colorView?.setBackgroundColor(Color.parseColor("#65e761"))
             }
-            itemView.setOnClickListener({
+            itemView.setOnClickListener{
                 val intent= Intent(context, ExpenseActivity::class.java)
                 intent.putExtra("phone",user?.phone)
                 intent.putExtra("name",user?.name)
                 context.startActivity(intent)
-            })
+            }
         }
     }
 

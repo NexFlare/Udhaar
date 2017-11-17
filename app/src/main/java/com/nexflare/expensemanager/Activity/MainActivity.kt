@@ -21,12 +21,13 @@ import com.nexflare.expensemanager.R
 import com.nexflare.expensemanager.User
 import com.nexflare.expensemanager.Adapter.UserAdapter
 import kotlinx.android.synthetic.main.activity_main.*
-
+import kotlinx.android.synthetic.main.toolbar_app.*
 class MainActivity : AppCompatActivity() {
     private lateinit var firebaseDataBase:FirebaseDatabase
     private lateinit var databaseReference:DatabaseReference
     private lateinit var userArrayList:ArrayList<User>
     private lateinit var adapter: UserAdapter
+    private var total:Long=0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -58,11 +59,14 @@ class MainActivity : AppCompatActivity() {
             override fun onDataChange(p0: DataSnapshot?) {
                 showToast("This method was called")
                 userArrayList.clear()
+                total=0
                 for (user:DataSnapshot in p0?.children!!){
+                    total+=user.child("total").value as Long
                     userArrayList.add(User(user.child("name").value.toString(),
                             user.child("phone").value.toString(),
                             user.child("total").value as Long))
                 }
+                totalUdhaar.text="Total \u20B9 $total"
                 adapter.updateArrayList(userArrayList)
             }
 
