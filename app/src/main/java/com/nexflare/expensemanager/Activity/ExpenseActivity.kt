@@ -40,7 +40,6 @@ class ExpenseActivity : AppCompatActivity() {
             val okTv=dialog.findViewById<TextView>(R.id.okTv)
             val radioGroup=dialog.findViewById<RadioGroup>(R.id.radioGroup)
             val radioUser=dialog.findViewById<RadioButton>(R.id.user)
-            val dateTil=dialog.findViewById<TextInputLayout>(R.id.dateTil)
             val dateEt=dialog.findViewById<EditText>(R.id.dateEt)
             val calenderIv=dialog.findViewById<ImageView>(R.id.calenderIv)
             if(name.contains(" "))

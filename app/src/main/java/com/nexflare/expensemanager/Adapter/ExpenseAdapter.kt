@@ -35,7 +35,7 @@ class ExpenseAdapter(val context:Context,var arrayList: ArrayList<Expense>?): Re
         fun bindView(position:Int){
             val expense=arrayList?.get(position)
             nameTv?.text=expense?.reason?:"Just for fun"
-            amountTv?.text=expense?.amount.toString()
+            amountTv?.text="\u20B9 "+ expense?.amount.toString()
             dateTv?.text=expense?.time
             if((expense?.amount?:0)<0){
                 colorView?.setBackgroundColor(Color.parseColor("#E93324"))

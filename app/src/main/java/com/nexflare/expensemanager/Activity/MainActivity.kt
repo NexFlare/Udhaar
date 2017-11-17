@@ -8,6 +8,7 @@ import android.content.pm.PackageManager
 import android.database.Cursor
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.provider.ContactsContract
 import android.support.design.widget.Snackbar
 import android.support.v4.app.ActivityCompat
@@ -30,7 +31,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         firebaseDataBase= FirebaseDatabase.getInstance()
-        firebaseDataBase.setPersistenceEnabled(true)
+        if(savedInstanceState==null)
+            firebaseDataBase.setPersistenceEnabled(true)
         databaseReference=firebaseDataBase.getReference("users")
         userArrayList=ArrayList()
         adapter= UserAdapter(this, userArrayList)
@@ -40,6 +42,11 @@ class MainActivity : AppCompatActivity() {
         fab.setOnClickListener {
             checkForPermission()
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?, outPersistentState: PersistableBundle?) {
+        super.onSaveInstanceState(outState, outPersistentState)
+        outState?.putBoolean("savePersistent",true)
     }
 
     private fun getUserData() {
