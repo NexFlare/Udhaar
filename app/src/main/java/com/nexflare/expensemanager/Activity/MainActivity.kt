@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
                             user.child("total").value as Long))
                 }
                 totalUdhaar.text="Total \u20B9 $total"
-                adapter.updateArrayList(userArrayList)
+                adapter.updateArrayList(userArrayList)   //This is to update the RecyclerView
             }
 
         })
@@ -75,6 +75,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkForPermission() {
         if(ActivityCompat.checkSelfPermission(this@MainActivity,Manifest.permission.READ_CONTACTS)!=PackageManager.PERMISSION_GRANTED){
+            // This is to check for the contacts permission
             ActivityCompat.requestPermissions(this@MainActivity, arrayOf(Manifest.permission.READ_CONTACTS),1234)
         }
         else{
